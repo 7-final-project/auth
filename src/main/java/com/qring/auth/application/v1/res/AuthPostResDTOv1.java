@@ -1,6 +1,5 @@
 package com.qring.auth.application.v1.res;
 
-import com.qring.auth.domain.model.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,9 +13,9 @@ public class AuthPostResDTOv1 {
 
     private User user;
 
-    private static AuthPostResDTOv1 of(UserEntity userEntity) {
+    public static AuthPostResDTOv1 of(String username, String role, String slackEmail) {
         return AuthPostResDTOv1.builder()
-                .user(User.from(userEntity))
+                .user(User.from(username, role, slackEmail))
                 .build();
     }
 
@@ -30,11 +29,11 @@ public class AuthPostResDTOv1 {
         private String role;
         private String slackEmail;
 
-        public static User from(UserEntity userEntity) {
+        public static User from(String username, String role, String slackEmail) {
             return User.builder()
-                    .username(userEntity.getUsername())
-                    .role(userEntity.getRole().getAuthority())
-                    .slackEmail(userEntity.getSlackEmail())
+                    .username(username)
+                    .role(role)
+                    .slackEmail(slackEmail)
                     .build();
         }
     }
