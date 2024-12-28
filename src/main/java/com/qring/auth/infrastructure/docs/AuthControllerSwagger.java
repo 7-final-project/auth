@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Tag(name = "Auth", description = "회원가입, 수정, 삭제 관련 사용자 API")
 public interface AuthControllerSwagger {
 
-    @Operation(summary = "회원 생성", description = "사용자 ID를 통해 허브를 생성하는 API 입니다.")
+    @Operation(summary = "회원 생성", description = "사용자의 계정, 비밀번호, 권한, 슬랙 이메일을 통해 회원가입을 하는 API 입니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "회원가입 성공", content = @Content(schema = @Schema(implementation = ResDTO.class))),
             @ApiResponse(responseCode = "400", description = "회원가입 실패.", content = @Content(schema = @Schema(implementation = ResDTO.class)))
