@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class AuthController implements AuthControllerSwagger {
+public class AuthControllerV1 implements AuthControllerSwagger {
 
     @PostMapping("/v1/auth")
     public ResponseEntity<ResDTO<AuthPostResDTOv1>> joinBy(@RequestBody PostAuthReqDTOv1 dto) {
