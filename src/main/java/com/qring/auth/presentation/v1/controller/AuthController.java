@@ -18,11 +18,11 @@ public class AuthController implements AuthControllerSwagger {
 
         return new ResponseEntity<>(
                 ResDTO.<AuthPostResDTOv1>builder()
-                        .code(HttpStatus.OK.value())
+                        .code(HttpStatus.CREATED.value())
                         .message("회원가입에 성공했습니다.")
                         .data(AuthPostResDTOv1.of("tempUser", "tempRole", "temp0000@slack.com"))
                         .build(),
-                HttpStatus.OK
+                HttpStatus.CREATED
         );
     }
 }
