@@ -12,8 +12,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Tag(name = "Auth", description = "회원가입, 수정, 삭제 관련 사용자 API")
+@RequestMapping("/v1/auth")
 public interface AuthControllerSwagger {
 
     @Operation(summary = "회원 생성", description = "사용자의 계정, 비밀번호, 권한, 슬랙 이메일을 통해 회원가입을 하는 API 입니다.")
@@ -21,6 +23,6 @@ public interface AuthControllerSwagger {
             @ApiResponse(responseCode = "201", description = "회원가입 성공", content = @Content(schema = @Schema(implementation = ResDTO.class))),
             @ApiResponse(responseCode = "400", description = "회원가입 실패.", content = @Content(schema = @Schema(implementation = ResDTO.class)))
     })
-    @PostMapping("/v1/auth")
+    @PostMapping
     ResponseEntity<ResDTO<AuthPostResDTOv1>> joinBy(@RequestBody PostAuthReqDTOV1 dto);
 }

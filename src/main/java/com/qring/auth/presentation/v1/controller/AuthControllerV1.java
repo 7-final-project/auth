@@ -4,17 +4,20 @@ import com.qring.auth.application.v1.res.AuthPostResDTOv1;
 import com.qring.auth.application.global.dto.ResDTO;
 import com.qring.auth.infrastructure.docs.AuthControllerSwagger;
 import com.qring.auth.presentation.v1.req.PostAuthReqDTOV1;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/v1/auth")
 public class AuthControllerV1 implements AuthControllerSwagger {
 
-    @PostMapping("/v1/auth")
-    public ResponseEntity<ResDTO<AuthPostResDTOv1>> joinBy(@RequestBody PostAuthReqDTOV1 dto) {
+    @PostMapping
+    public ResponseEntity<ResDTO<AuthPostResDTOv1>> joinBy(@Valid @RequestBody PostAuthReqDTOV1 dto) {
 
         return new ResponseEntity<>(
                 ResDTO.<AuthPostResDTOv1>builder()
