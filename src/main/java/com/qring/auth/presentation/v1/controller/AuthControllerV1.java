@@ -3,7 +3,7 @@ package com.qring.auth.presentation.v1.controller;
 import com.qring.auth.application.v1.res.AuthPostResDTOv1;
 import com.qring.auth.application.v1.res.ResDTO;
 import com.qring.auth.infrastructure.docs.AuthControllerSwagger;
-import com.qring.auth.presentation.v1.req.PostAuthReqDTOv1;
+import com.qring.auth.presentation.v1.req.PostAuthReqDTOV1;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthControllerV1 implements AuthControllerSwagger {
 
     @PostMapping("/v1/auth")
-    public ResponseEntity<ResDTO<AuthPostResDTOv1>> joinBy(@RequestBody PostAuthReqDTOv1 dto) {
+    public ResponseEntity<ResDTO<AuthPostResDTOv1>> joinBy(@RequestBody PostAuthReqDTOV1 dto) {
 
         return new ResponseEntity<>(
                 ResDTO.<AuthPostResDTOv1>builder()

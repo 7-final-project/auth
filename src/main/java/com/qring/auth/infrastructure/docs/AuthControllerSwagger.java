@@ -2,7 +2,7 @@ package com.qring.auth.infrastructure.docs;
 
 import com.qring.auth.application.v1.res.AuthPostResDTOv1;
 import com.qring.auth.application.v1.res.ResDTO;
-import com.qring.auth.presentation.v1.req.PostAuthReqDTOv1;
+import com.qring.auth.presentation.v1.req.PostAuthReqDTOV1;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,5 +22,5 @@ public interface AuthControllerSwagger {
             @ApiResponse(responseCode = "400", description = "회원가입 실패.", content = @Content(schema = @Schema(implementation = ResDTO.class)))
     })
     @PostMapping("/v1/auth")
-    ResponseEntity<ResDTO<AuthPostResDTOv1>> joinBy(@RequestBody PostAuthReqDTOv1 dto);
+    ResponseEntity<ResDTO<AuthPostResDTOv1>> joinBy(@RequestBody PostAuthReqDTOV1 dto);
 }
