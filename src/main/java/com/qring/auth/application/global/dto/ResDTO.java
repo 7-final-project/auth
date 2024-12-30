@@ -1,4 +1,4 @@
-package com.qring.auth.application.v1.res;
+package com.qring.auth.application.global.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,7 +1,7 @@
 package com.qring.auth.presentation.v1.controller;
 
 import com.qring.auth.application.v1.res.AuthPostResDTOv1;
-import com.qring.auth.application.v1.res.ResDTO;
+import com.qring.auth.application.global.dto.ResDTO;
 import com.qring.auth.infrastructure.docs.AuthControllerSwagger;
 import com.qring.auth.presentation.v1.req.PostAuthReqDTOV1;
 import org.springframework.http.HttpStatus;
