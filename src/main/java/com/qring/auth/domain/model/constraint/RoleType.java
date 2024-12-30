@@ -13,9 +13,9 @@ public enum RoleType {
     private final String authority;
 
     public static class Authority {
-        public static final String CUSTOMER = "ROLE_CUSTOMER";
-        public static final String OWNER = "ROLE_OWNER";
-        public static final String ADMIN = "ROLE_ADMIN";
+        public static final String CUSTOMER = "고객";
+        public static final String OWNER = "점주";
+        public static final String ADMIN = "관리자";
     }
 }
 
