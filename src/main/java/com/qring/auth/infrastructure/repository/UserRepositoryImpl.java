@@ -15,6 +15,14 @@ public class UserRepositoryImpl implements UserRepository {
         return jpaUserRepository.existsByUsername(username);
     }
 
+    public boolean existsByPhone(String phone) {
+        return jpaUserRepository.existsByPhone(phone);
+    }
+
+    public boolean existsBySlackEmail(String slackEmail) {
+        return jpaUserRepository.existsBySlackEmail(slackEmail);
+    }
+
     public UserEntity save(UserEntity userEntity) {
         return jpaUserRepository.save(userEntity);
     }

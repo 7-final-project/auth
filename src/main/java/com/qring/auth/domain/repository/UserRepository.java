@@ -6,6 +6,10 @@ public interface UserRepository {
 
     boolean existsByUsername(String username);
 
+    boolean existsByPhone(String phone);
+
+    boolean existsBySlackEmail(String slackEmail);
+
     UserEntity save(UserEntity userEntity);
 
 }
