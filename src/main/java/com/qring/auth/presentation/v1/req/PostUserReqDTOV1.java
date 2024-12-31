@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class PostAuthReqDTOV1 {
+public class PostUserReqDTOV1 {
 
     @Valid
     @NotNull(message = "회원 정보를 입력해주세요.")

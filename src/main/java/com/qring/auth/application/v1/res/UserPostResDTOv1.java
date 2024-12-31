@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthPostResDTOv1 {
+public class UserPostResDTOv1 {
 
     private User user;
 
-    public static AuthPostResDTOv1 of(UserEntity userEntity) {
-        return AuthPostResDTOv1.builder()
+    public static UserPostResDTOv1 of(UserEntity userEntity) {
+        return UserPostResDTOv1.builder()
                 .user(User.from(userEntity))
                 .build();
     }

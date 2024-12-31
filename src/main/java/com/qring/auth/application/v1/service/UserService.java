@@ -1,9 +1,9 @@
 package com.qring.auth.application.v1.service;
 
-import com.qring.auth.application.v1.res.AuthPostResDTOv1;
+import com.qring.auth.application.v1.res.UserPostResDTOv1;
 import com.qring.auth.domain.model.UserEntity;
 import com.qring.auth.domain.repository.UserRepository;
-import com.qring.auth.presentation.v1.req.PostAuthReqDTOV1;
+import com.qring.auth.presentation.v1.req.PostUserReqDTOV1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public AuthPostResDTOv1 joinBy(PostAuthReqDTOV1 dto) {
+    public UserPostResDTOv1 joinBy(PostUserReqDTOV1 dto) {
 
         validateUsernameDuplication(dto.getUser().getUsername());
 
@@ -29,7 +29,7 @@ public class UserService {
                 dto.getUser().getSlackEmail()
         );
 
-        return AuthPostResDTOv1.of(userRepository.save(userEntityForSave));
+        return UserPostResDTOv1.of(userRepository.save(userEntityForSave));
     }
 
     private void validateUsernameDuplication(String username) {
