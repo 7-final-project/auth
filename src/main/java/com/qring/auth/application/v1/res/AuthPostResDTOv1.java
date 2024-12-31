@@ -26,6 +26,7 @@ public class AuthPostResDTOv1 {
     @AllArgsConstructor
     public static class User {
 
+        private Long id;
         private String username;
         private String phone;
         private String role;
@@ -33,6 +34,7 @@ public class AuthPostResDTOv1 {
 
         public static User from(UserEntity userEntity) {
             return User.builder()
+                    .id(userEntity.getId())
                     .username(userEntity.getUsername())
                     .phone(userEntity.getPhone())
                     .role(userEntity.getRole().getAuthority())
