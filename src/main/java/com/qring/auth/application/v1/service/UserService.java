@@ -19,7 +19,7 @@ public class UserService {
     @Transactional
     public UserPostResDTOv1 joinBy(PostUserReqDTOV1 dto) {
 
-        validateUsernameDuplication(dto.getUser().getUsername());
+        validateUserCreationProcess(dto);
 
         UserEntity userEntityForSave = UserEntity.createUserEntity(
                 dto.getUser().getUsername(),
@@ -30,6 +30,28 @@ public class UserService {
         );
 
         return UserPostResDTOv1.of(userRepository.save(userEntityForSave));
+    }
+
+    private void validateUserCreationProcess(PostUserReqDTOV1 dto) {
+
+        validateUsernameDuplication(dto.getUser().getUsername());
+
+        validatePhoneDuplication(dto.getUser().getPhone());
+
+        validateSlackEmailDuplication(dto.getUser().getSlackEmail());
+
+    }
+
+    private void validatePhoneDuplication(String phone) {
+        if (userRepository.existsByPhone(phone)) {
+            throw new IllegalArgumentException("이미 등록된 휴대폰 번호입니다.");
+        }
+    }
+
+    private void validateSlackEmailDuplication(String slackEmail) {
+        if (userRepository.existsBySlackEmail(slackEmail)) {
+            throw new IllegalArgumentException("이미 등록된 슬랙 이메일입니다.");
+        }
     }
 
     private void validateUsernameDuplication(String username) {
