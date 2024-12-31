@@ -19,6 +19,9 @@ public class UserService {
     @Transactional
     public UserPostResDTOv1 joinBy(PostUserReqDTOV1 dto) {
 
+        // --
+        // XXX : 데이터 중복 검증을 서비스 레이어에서 수행할까 ? DB 레벨에서 수행할까 ?
+        // --
         validateUserCreationProcess(dto);
 
         UserEntity userEntityForSave = UserEntity.createUserEntity(
@@ -32,6 +35,8 @@ public class UserService {
         return UserPostResDTOv1.of(userRepository.save(userEntityForSave));
     }
 
+    // -----
+    // NOTE : 회원가입 검증 프로세스
     private void validateUserCreationProcess(PostUserReqDTOV1 dto) {
 
         validateUsernameDuplication(dto.getUser().getUsername());
@@ -42,18 +47,24 @@ public class UserService {
 
     }
 
+    // -----
+    // NOTE : 휴대폰 번호 중복 검증
     private void validatePhoneDuplication(String phone) {
         if (userRepository.existsByPhone(phone)) {
             throw new IllegalArgumentException("이미 등록된 휴대폰 번호입니다.");
         }
     }
 
+    // -----
+    // NOTE : 슬랙 이메일 중복 검증
     private void validateSlackEmailDuplication(String slackEmail) {
         if (userRepository.existsBySlackEmail(slackEmail)) {
             throw new IllegalArgumentException("이미 등록된 슬랙 이메일입니다.");
         }
     }
 
+    // -----
+    // NOTE : 유저 이름 중복 검증
     private void validateUsernameDuplication(String username) {
         if (userRepository.existsByUsername(username)) {
             throw new IllegalArgumentException("이미 존재하는 유저이름입니다.");
