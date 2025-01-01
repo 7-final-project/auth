@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/v1/users")
 public interface UserControllerSwagger {
 
-    @Operation(summary = "회원 생성", description = "회원가입을 하는 API 입니다.")
+    @Operation(summary = "회원가입", description = "회원가입을 하는 API 입니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "회원가입 성공", content = @Content(schema = @Schema(implementation = ResDTO.class))),
             @ApiResponse(responseCode = "400", description = "회원가입 실패.", content = @Content(schema = @Schema(implementation = ResDTO.class)))
     })
-    @PostMapping
+    @PostMapping("/join")
     ResponseEntity<ResDTO<UserPostResDTOV1>> joinBy(@RequestBody PostUserReqDTOV1 dto);
 }

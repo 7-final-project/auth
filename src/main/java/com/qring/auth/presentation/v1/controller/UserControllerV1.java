@@ -21,7 +21,7 @@ public class UserControllerV1 implements UserControllerSwagger {
 
     private final UserServiceV1 userServiceV1;
 
-    @PostMapping
+    @PostMapping("/join")
     public ResponseEntity<ResDTO<UserPostResDTOV1>> joinBy(@Valid @RequestBody PostUserReqDTOV1 dto) {
 
         return new ResponseEntity<>(
