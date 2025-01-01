@@ -20,9 +20,6 @@ public class UserServiceV1 {
     @Transactional
     public UserPostResDTOV1 joinBy(PostUserReqDTOV1 dto) {
 
-        // --
-        // XXX : 데이터 중복 검증을 서비스 레이어에서 수행할까 ? DB 레벨에서 수행할까 ?
-        // --
         validateUserCreationProcess(dto);
 
         UserEntity userEntityForSave = UserEntity.createUserEntity(
