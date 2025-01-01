@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserServiceV1 {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;

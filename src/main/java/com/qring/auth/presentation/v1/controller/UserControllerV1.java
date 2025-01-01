@@ -2,7 +2,7 @@ package com.qring.auth.presentation.v1.controller;
 
 import com.qring.auth.application.v1.res.UserPostResDTOV1;
 import com.qring.auth.application.global.dto.ResDTO;
-import com.qring.auth.application.v1.service.UserService;
+import com.qring.auth.application.v1.service.UserServiceV1;
 import com.qring.auth.infrastructure.docs.UserControllerSwagger;
 import com.qring.auth.presentation.v1.req.PostUserReqDTOV1;
 import jakarta.validation.Valid;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/users")
 public class UserControllerV1 implements UserControllerSwagger {
 
-    private final UserService userService;
+    private final UserServiceV1 userServiceV1;
 
     @PostMapping
     public ResponseEntity<ResDTO<UserPostResDTOV1>> joinBy(@Valid @RequestBody PostUserReqDTOV1 dto) {
@@ -28,7 +28,7 @@ public class UserControllerV1 implements UserControllerSwagger {
                 ResDTO.<UserPostResDTOV1>builder()
                         .code(HttpStatus.CREATED.value())
                         .message("회원가입에 성공했습니다.")
-                        .data(userService.joinBy(dto))
+                        .data(userServiceV1.joinBy(dto))
                         .build(),
                 HttpStatus.CREATED
         );
