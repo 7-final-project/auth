@@ -8,9 +8,10 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum ErrorCode {
 
-    DUPLICATE_ERROR(HttpStatus.BAD_REQUEST, 2002),
-    AUTHORITY_ERROR(HttpStatus.FORBIDDEN, 2001),
-    VALIDATION_ERROR(HttpStatus.BAD_REQUEST, 2003);
+    AUTHORITY_ERROR(HttpStatus.FORBIDDEN, 2001), // NOTE : 권한 검증 에러
+    DUPLICATE_ERROR(HttpStatus.BAD_REQUEST, 2002), // NOTE : 중복 검증 에러
+    NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, 2003), // NOTE : 존재하지 않는 객체 에러
+    BAD_REQUEST_ERROR(HttpStatus.BAD_REQUEST, 2004); // NOTE : 기타 에러
 
     private final HttpStatus httpStatus;
     private final Integer code;

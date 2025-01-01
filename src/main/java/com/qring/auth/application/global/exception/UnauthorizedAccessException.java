@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class UnauthorizedAccessException extends AuthException {
-    public UnauthorizedAccessException(ErrorCode errorCode, String message) {
-        super(errorCode, message);
+    public UnauthorizedAccessException(String message) {
+        super(ErrorCode.AUTHORITY_ERROR, message);
     }
 }
