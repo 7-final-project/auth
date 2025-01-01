@@ -8,11 +8,11 @@ public interface UserRepository {
 
     Optional<UserEntity> findByUsernameAndDeletedAtIsNull(String username);
 
-    boolean existsByUsername(String username);
+    boolean existsByUsernameAndDeletedAtIsNull(String username);
 
-    boolean existsByPhone(String phone);
+    boolean existsByPhoneAndDeletedAtIsNull(String phone);
 
-    boolean existsBySlackEmail(String slackEmail);
+    boolean existsBySlackEmailAndDeletedAtIsNull(String slackEmail);
 
     UserEntity save(UserEntity userEntity);
 

@@ -9,10 +9,10 @@ public interface JpaUserRepository extends JpaRepository<UserEntity, Long> {
 
     Optional<UserEntity> findByUsernameAndDeletedAtIsNull(String username);
 
-    boolean existsByUsername(String username);
+    boolean existsByUsernameAndDeletedAtIsNull(String username);
 
-    boolean existsByPhone(String phone);
+    boolean existsByPhoneAndDeletedAtIsNull(String phone);
 
-    boolean existsBySlackEmail(String email);
+    boolean existsBySlackEmailAndDeletedAtIsNull(String email);
 
 }

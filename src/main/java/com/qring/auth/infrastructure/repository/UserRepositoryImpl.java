@@ -17,16 +17,16 @@ public class UserRepositoryImpl implements UserRepository {
         return jpaUserRepository.findByUsernameAndDeletedAtIsNull(username);
     }
 
-    public boolean existsByUsername(String username) {
-        return jpaUserRepository.existsByUsername(username);
+    public boolean existsByUsernameAndDeletedAtIsNull(String username) {
+        return jpaUserRepository.existsByUsernameAndDeletedAtIsNull(username);
     }
 
-    public boolean existsByPhone(String phone) {
-        return jpaUserRepository.existsByPhone(phone);
+    public boolean existsByPhoneAndDeletedAtIsNull(String phone) {
+        return jpaUserRepository.existsByPhoneAndDeletedAtIsNull(phone);
     }
 
-    public boolean existsBySlackEmail(String slackEmail) {
-        return jpaUserRepository.existsBySlackEmail(slackEmail);
+    public boolean existsBySlackEmailAndDeletedAtIsNull(String slackEmail) {
+        return jpaUserRepository.existsBySlackEmailAndDeletedAtIsNull(slackEmail);
     }
 
     public UserEntity save(UserEntity userEntity) {

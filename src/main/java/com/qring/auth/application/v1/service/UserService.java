@@ -50,7 +50,7 @@ public class UserService {
     // -----
     // NOTE : 휴대폰 번호 중복 검증
     private void validatePhoneDuplication(String phone) {
-        if (userRepository.existsByPhone(phone)) {
+        if (userRepository.existsByPhoneAndDeletedAtIsNull(phone)) {
             throw new IllegalArgumentException("이미 등록된 휴대폰 번호입니다.");
         }
     }
@@ -58,7 +58,7 @@ public class UserService {
     // -----
     // NOTE : 슬랙 이메일 중복 검증
     private void validateSlackEmailDuplication(String slackEmail) {
-        if (userRepository.existsBySlackEmail(slackEmail)) {
+        if (userRepository.existsBySlackEmailAndDeletedAtIsNull(slackEmail)) {
             throw new IllegalArgumentException("이미 등록된 슬랙 이메일입니다.");
         }
     }
@@ -66,7 +66,7 @@ public class UserService {
     // -----
     // NOTE : 유저 이름 중복 검증
     private void validateUsernameDuplication(String username) {
-        if (userRepository.existsByUsername(username)) {
+        if (userRepository.existsByUsernameAndDeletedAtIsNull(username)) {
             throw new IllegalArgumentException("이미 존재하는 유저이름입니다.");
         }
     }
