@@ -1,6 +1,6 @@
 package com.qring.auth.application.v1.service;
 
-import com.qring.auth.application.v1.res.UserPostResDTOv1;
+import com.qring.auth.application.v1.res.UserPostResDTOV1;
 import com.qring.auth.domain.model.UserEntity;
 import com.qring.auth.domain.repository.UserRepository;
 import com.qring.auth.presentation.v1.req.PostUserReqDTOV1;
@@ -17,7 +17,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public UserPostResDTOv1 joinBy(PostUserReqDTOV1 dto) {
+    public UserPostResDTOV1 joinBy(PostUserReqDTOV1 dto) {
 
         // --
         // XXX : 데이터 중복 검증을 서비스 레이어에서 수행할까 ? DB 레벨에서 수행할까 ?
@@ -32,7 +32,7 @@ public class UserService {
                 dto.getUser().getSlackEmail()
         );
 
-        return UserPostResDTOv1.of(userRepository.save(userEntityForSave));
+        return UserPostResDTOV1.of(userRepository.save(userEntityForSave));
     }
 
     // -----

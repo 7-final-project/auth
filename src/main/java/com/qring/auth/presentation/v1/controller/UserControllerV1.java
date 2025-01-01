@@ -1,6 +1,6 @@
 package com.qring.auth.presentation.v1.controller;
 
-import com.qring.auth.application.v1.res.UserPostResDTOv1;
+import com.qring.auth.application.v1.res.UserPostResDTOV1;
 import com.qring.auth.application.global.dto.ResDTO;
 import com.qring.auth.application.v1.service.UserService;
 import com.qring.auth.infrastructure.docs.UserControllerSwagger;
@@ -22,10 +22,10 @@ public class UserControllerV1 implements UserControllerSwagger {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<ResDTO<UserPostResDTOv1>> joinBy(@Valid @RequestBody PostUserReqDTOV1 dto) {
+    public ResponseEntity<ResDTO<UserPostResDTOV1>> joinBy(@Valid @RequestBody PostUserReqDTOV1 dto) {
 
         return new ResponseEntity<>(
-                ResDTO.<UserPostResDTOv1>builder()
+                ResDTO.<UserPostResDTOV1>builder()
                         .code(HttpStatus.CREATED.value())
                         .message("회원가입에 성공했습니다.")
                         .data(userService.joinBy(dto))
