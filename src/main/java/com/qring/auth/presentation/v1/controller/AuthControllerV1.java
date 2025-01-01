@@ -1,28 +1,35 @@
 package com.qring.auth.presentation.v1.controller;
 
-import com.qring.auth.application.v1.res.AuthPostResDTOv1;
-import com.qring.auth.application.v1.res.ResDTO;
+import com.qring.auth.application.global.dto.ResDTO;
+import com.qring.auth.application.v1.service.AuthServiceV1;
 import com.qring.auth.infrastructure.docs.AuthControllerSwagger;
-import com.qring.auth.presentation.v1.req.PostAuthReqDTOv1;
+import com.qring.auth.infrastructure.jwt.JwtUtil;
+import com.qring.auth.presentation.v1.req.PostAuthReqDTOV1;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
+@RequestMapping("/v1/auth")
 public class AuthControllerV1 implements AuthControllerSwagger {
 
-    @PostMapping("/v1/auth")
-    public ResponseEntity<ResDTO<AuthPostResDTOv1>> joinBy(@RequestBody PostAuthReqDTOv1 dto) {
+    private final AuthServiceV1 authServiceV1;
+
+    @PostMapping("/login")
+    public ResponseEntity<ResDTO<Object>> loginBy(HttpServletResponse res, @Valid @RequestBody PostAuthReqDTOV1 dto) {
+
+        res.addHeader(JwtUtil.AUTHORIZATION_HEADER, authServiceV1.loginBy(dto));
 
         return new ResponseEntity<>(
-                ResDTO.<AuthPostResDTOv1>builder()
-                        .code(HttpStatus.CREATED.value())
-                        .message("회원가입에 성공했습니다.")
-                        .data(AuthPostResDTOv1.of("tempUser", "tempRole", "temp0000@slack.com"))
+                ResDTO.builder()
+                        .code(HttpStatus.OK.value())
+                        .message("로그인에 성공하였습니다.")
                         .build(),
-                HttpStatus.CREATED
+                HttpStatus.OK
         );
     }
 }

@@ -37,9 +37,6 @@ dependencies {
     // TSID
     implementation 'io.hypersistence:hypersistence-utils-hibernate-63:3.7.5'
 
-    // Security
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-
     // swagger
     implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.3.0'
 
