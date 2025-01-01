@@ -1,5 +1,6 @@
 package com.qring.auth.application.v1.service;
 
+import com.qring.auth.application.global.exception.BadRequestException;
 import com.qring.auth.domain.model.UserEntity;
 import com.qring.auth.domain.repository.UserRepository;
 import com.qring.auth.infrastructure.jwt.JwtUtil;
@@ -34,14 +35,14 @@ public class AuthServiceV1 {
     // NOTE : 아이디 검증 및 객체 조회
     private UserEntity getUserEntityByUsername(String username) {
         return userRepository.findByUsernameAndDeletedAtIsNull(username)
-                .orElseThrow(() -> new IllegalArgumentException("아이디를 정확히 입력해주세요."));
+                .orElseThrow(() -> new BadRequestException("아이디를 정확히 입력해주세요."));
     }
 
     // -----
     // NOTE : 비밀번호 검증
     private void validatePasswordMatches(PostAuthReqDTOV1 dto, UserEntity userEntityForCheck) {
         if (!passwordEncoder.matches(dto.getUser().getPassword(), userEntityForCheck.getPassword())) {
-            throw new IllegalArgumentException("비밀번호를 정확히 입력해주세요.");
+            throw new BadRequestException("비밀번호를 정확히 입력해주세요.");
         }
     }
 }
