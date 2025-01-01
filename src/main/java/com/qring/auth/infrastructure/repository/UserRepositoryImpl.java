@@ -5,11 +5,17 @@ import com.qring.auth.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository {
 
     private final JpaUserRepository jpaUserRepository;
+
+    public Optional<UserEntity> findByUsernameAndDeletedAtIsNull(String username) {
+        return jpaUserRepository.findByUsernameAndDeletedAtIsNull(username);
+    }
 
     public boolean existsByUsername(String username) {
         return jpaUserRepository.existsByUsername(username);
