@@ -13,6 +13,10 @@ public class UserRepositoryImpl implements UserRepository {
 
     private final JpaUserRepository jpaUserRepository;
 
+    public Optional<UserEntity> findByIdAndDeletedAtIsNull(Long id) {
+        return jpaUserRepository.findByIdAndDeletedAtIsNull(id);
+    }
+
     public Optional<UserEntity> findByUsernameAndDeletedAtIsNull(String username) {
         return jpaUserRepository.findByUsernameAndDeletedAtIsNull(username);
     }

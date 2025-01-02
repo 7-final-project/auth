@@ -32,4 +32,11 @@ public class AuthControllerV1 implements AuthControllerSwagger {
                 HttpStatus.OK
         );
     }
+
+    // --
+    // XXX : 이거는 External 패키지로 빼서 관리를 해야할까, 클라이언트 컨트롤러에 위치해야 할까 ?
+    @PostMapping("/passport")
+    public ResponseEntity<String> postBy(@RequestHeader("X-User-Id") Long userId) {
+        return ResponseEntity.ok(authServiceV1.postBy(userId));
+    }
 }

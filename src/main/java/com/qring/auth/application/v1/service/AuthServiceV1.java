@@ -1,6 +1,7 @@
 package com.qring.auth.application.v1.service;
 
 import com.qring.auth.application.global.exception.BadRequestException;
+import com.qring.auth.application.global.exception.EntityNotFoundException;
 import com.qring.auth.domain.model.UserEntity;
 import com.qring.auth.domain.repository.UserRepository;
 import com.qring.auth.infrastructure.jwt.JwtUtil;
@@ -24,11 +25,27 @@ public class AuthServiceV1 {
 
         validatePasswordMatches(dto, userEntityForCheck);
 
-        return JwtUtil.createToken(
-                userEntityForCheck.getId(),
-                userEntityForCheck.getUsername(),
-                userEntityForCheck.getRole()
+        return JwtUtil.createToken(userEntityForCheck.getId());
+    }
+
+    @Transactional
+    public String postBy(Long userId) {
+
+        UserEntity userEntityForTokenGeneration = getUserEntityById(userId);
+
+        return JwtUtil.createPassport(
+                userEntityForTokenGeneration.getId(),
+                userEntityForTokenGeneration.getUsername(),
+                userEntityForTokenGeneration.getRole().getAuthority(),
+                userEntityForTokenGeneration.getSlackEmail()
         );
+    }
+
+    // -----
+    // NOTE : ID 기준 객체 조회
+    private UserEntity getUserEntityById(Long userId) {
+        return userRepository.findByIdAndDeletedAtIsNull(userId)
+                .orElseThrow(() -> new EntityNotFoundException("해당 유저를 찾을 수 없습니다."));
     }
 
     // -----

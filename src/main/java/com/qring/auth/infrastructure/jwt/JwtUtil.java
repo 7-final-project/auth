@@ -17,8 +17,6 @@ import java.util.Date;
 public class JwtUtil {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
-    public static final String AUTHORIZATION_KEY = "auth";
-    public static final String USER_IDENTIFIER_KEY = "userId";
     public static final String BEARER_PREFIX = "Bearer ";
     private static final long TOKEN_TIME = 60 * 60 * 1000L;
 
@@ -34,15 +32,28 @@ public class JwtUtil {
         key = Keys.hmacShaKeyFor(bytes);
     }
 
-    public static String createToken(Long userId, String username, RoleType role) {
+    public static String createToken(Long userId) {
+        Date date = new Date();
+
+        return BEARER_PREFIX +
+                Jwts.builder()
+                        .claim("userId", userId)
+                        .setExpiration(new Date(date.getTime() + TOKEN_TIME))
+                        .setIssuedAt(date)
+                        .signWith(key, signatureAlgorithm)
+                        .compact();
+    }
+
+    public static String createPassport(Long id, String username, String role, String slackEmail) {
         Date date = new Date();
 
         return BEARER_PREFIX +
                 Jwts.builder()
                         .setSubject(username)
-                        .claim(USER_IDENTIFIER_KEY, userId)
-                        .claim(AUTHORIZATION_KEY, role)
-                        .setExpiration(new Date(date.getTime() + TOKEN_TIME))
+                        .claim("userId", id)
+                        .claim("role", role)
+                        .claim("slackEmail", slackEmail)
+                        .setExpiration(new Date(date.getTime() + (60 * 60 * 5)))
                         .setIssuedAt(date)
                         .signWith(key, signatureAlgorithm)
                         .compact();
