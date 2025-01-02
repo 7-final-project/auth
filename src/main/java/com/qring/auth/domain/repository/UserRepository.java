@@ -6,6 +6,8 @@ import java.util.Optional;
 
 public interface UserRepository {
 
+    Optional<UserEntity> findByIdAndDeletedAtIsNull(Long id);
+
     Optional<UserEntity> findByUsernameAndDeletedAtIsNull(String username);
 
     boolean existsByUsernameAndDeletedAtIsNull(String username);
