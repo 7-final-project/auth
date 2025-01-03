@@ -22,20 +22,12 @@ public class UserRepositoryImpl implements UserRepository {
         return jpaUserRepository.findByUsernameAndDeletedAtIsNull(username);
     }
 
+    public Optional<UserEntity> findFirstByUsernameOrPhoneOrSlackEmailAndDeletedAtIsNull(String username, String phone, String slackEmail) {
+        return jpaUserRepository.findFirstByUsernameOrPhoneOrSlackEmailAndDeletedAtIsNull(username, phone, slackEmail);
+    }
+
     public Optional<UserEntity> findUserByIdNotAndUsernameOrPhoneOrSlackEmailAndDeletedAtIsNull(Long id, String username, String phone, String slackEmail) {
         return jpaUserRepository.findUserByIdNotAndUsernameOrPhoneOrSlackEmailAndDeletedAtIsNull(id, username, phone, slackEmail);
-    }
-
-    public boolean existsByUsernameAndDeletedAtIsNull(String username) {
-        return jpaUserRepository.existsByUsernameAndDeletedAtIsNull(username);
-    }
-
-    public boolean existsByPhoneAndDeletedAtIsNull(String phone) {
-        return jpaUserRepository.existsByPhoneAndDeletedAtIsNull(phone);
-    }
-
-    public boolean existsBySlackEmailAndDeletedAtIsNull(String slackEmail) {
-        return jpaUserRepository.existsBySlackEmailAndDeletedAtIsNull(slackEmail);
     }
 
     public UserEntity save(UserEntity userEntity) {

@@ -12,6 +12,8 @@ public interface JpaUserRepository extends JpaRepository<UserEntity, Long> {
 
     Optional<UserEntity> findByUsernameAndDeletedAtIsNull(String username);
 
+    Optional<UserEntity> findFirstByUsernameOrPhoneOrSlackEmailAndDeletedAtIsNull(String username, String phone, String slackEmail);
+
     @Query("select u " +
             "from UserEntity u " +
             "where u.id <> :id " +
@@ -19,11 +21,5 @@ public interface JpaUserRepository extends JpaRepository<UserEntity, Long> {
             "and u.deletedAt is null"
     )
     Optional<UserEntity> findUserByIdNotAndUsernameOrPhoneOrSlackEmailAndDeletedAtIsNull(Long id, String username, String phone, String slackEmail);
-
-    boolean existsByUsernameAndDeletedAtIsNull(String username);
-
-    boolean existsByPhoneAndDeletedAtIsNull(String phone);
-
-    boolean existsBySlackEmailAndDeletedAtIsNull(String email);
 
 }
