@@ -10,6 +10,8 @@ public interface UserRepository {
 
     Optional<UserEntity> findByUsernameAndDeletedAtIsNull(String username);
 
+    Optional<UserEntity> findUserByIdNotAndUsernameOrPhoneOrSlackEmailAndDeletedAtIsNull(Long id, String username, String phone, String slackEmail);
+
     boolean existsByUsernameAndDeletedAtIsNull(String username);
 
     boolean existsByPhoneAndDeletedAtIsNull(String phone);

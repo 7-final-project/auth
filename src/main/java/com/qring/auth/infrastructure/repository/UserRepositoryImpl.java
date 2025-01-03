@@ -5,6 +5,7 @@ import com.qring.auth.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -19,6 +20,10 @@ public class UserRepositoryImpl implements UserRepository {
 
     public Optional<UserEntity> findByUsernameAndDeletedAtIsNull(String username) {
         return jpaUserRepository.findByUsernameAndDeletedAtIsNull(username);
+    }
+
+    public Optional<UserEntity> findUserByIdNotAndUsernameOrPhoneOrSlackEmailAndDeletedAtIsNull(Long id, String username, String phone, String slackEmail) {
+        return jpaUserRepository.findUserByIdNotAndUsernameOrPhoneOrSlackEmailAndDeletedAtIsNull(id, username, phone, slackEmail);
     }
 
     public boolean existsByUsernameAndDeletedAtIsNull(String username) {
