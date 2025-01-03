@@ -5,14 +5,12 @@ import com.qring.auth.application.global.dto.ResDTO;
 import com.qring.auth.application.v1.service.UserServiceV1;
 import com.qring.auth.infrastructure.docs.UserControllerSwagger;
 import com.qring.auth.presentation.v1.req.PostUserReqDTOV1;
+import com.qring.auth.presentation.v1.req.PutUserReqDTOV1;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,6 +29,22 @@ public class UserControllerV1 implements UserControllerSwagger {
                         .data(userServiceV1.joinBy(dto))
                         .build(),
                 HttpStatus.CREATED
+        );
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ResDTO<Object>> putBy(@RequestHeader("X-Passport-Token") String passport,
+                                                @PathVariable Long id,
+                                                @Valid @RequestBody PutUserReqDTOV1 dto) {
+
+        userServiceV1.putBy(passport, id, dto);
+
+        return new ResponseEntity<>(
+                ResDTO.builder()
+                        .code(HttpStatus.OK.value())
+                        .message("회원 수정에 성공했습니다.")
+                        .build(),
+                HttpStatus.OK
         );
     }
 }

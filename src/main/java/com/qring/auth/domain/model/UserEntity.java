@@ -78,4 +78,13 @@ public class UserEntity {
                 .slackEmail(slackEmail)
                 .build();
     }
+
+    public void modifyUserEntity(String username, String password, String phone, String role, String slackEmail, String modifiedBy) {
+        this.username = username;
+        this.password = password;
+        this.phone = phone;
+        this.role = RoleType.fromString(role);
+        this.slackEmail = slackEmail;
+        this.modifiedBy = modifiedBy;
+    }
 }
