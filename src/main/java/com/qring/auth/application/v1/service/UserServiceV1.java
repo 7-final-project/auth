@@ -2,9 +2,11 @@ package com.qring.auth.application.v1.service;
 
 import com.qring.auth.application.global.exception.DuplicateResourceException;
 import com.qring.auth.application.global.exception.EntityNotFoundException;
+import com.qring.auth.application.global.exception.UnauthorizedAccessException;
 import com.qring.auth.application.v1.res.UserPostResDTOV1;
 import com.qring.auth.domain.model.UserEntity;
 import com.qring.auth.domain.repository.UserRepository;
+import com.qring.auth.infrastructure.util.PassportUtil;
 import com.qring.auth.presentation.v1.req.PostUserReqDTOV1;
 import com.qring.auth.presentation.v1.req.PutUserReqDTOV1;
 import lombok.RequiredArgsConstructor;
@@ -40,11 +42,7 @@ public class UserServiceV1 {
     @Transactional
     public void putBy(String passport, Long id, PutUserReqDTOV1 dto) {
 
-        // --
-        // TODO : 권한 검증 로직 구현 ( MASTER만 접근 가능 )
-        // --
-
-        validateUserModificationProcess(id, dto);
+        validateUserModificationProcess(passport, id, dto);
 
         UserEntity userEntityForModify = getUserEntityById(id);
 
@@ -55,7 +53,7 @@ public class UserServiceV1 {
                     dto.getUser().getPhone(),
                     dto.getUser().getRole(),
                     dto.getUser().getSlackEmail(),
-                    "modifiedBy"
+                    PassportUtil.getUsername(passport)
             );
         } else {
             userEntityForModify.modifyUserEntity(
@@ -90,7 +88,27 @@ public class UserServiceV1 {
 
     // -----
     // NOTE : 회원수정 검증 프로세스
-    private void validateUserModificationProcess(Long id, PutUserReqDTOV1 dto) {
+    private void validateUserModificationProcess(String passport, Long id, PutUserReqDTOV1 dto) {
+
+        // NOTE : 권한 검증
+        validateUserRole(passport);
+
+        // NOTE : 필드 중복 검증
+        validateUserDuplicationOnModify(id, dto);
+
+    }
+
+    // -----
+    // NOTE : 관리자 권한 검증
+    private static void validateUserRole(String passport) {
+        if (!Objects.equals(PassportUtil.getRole(passport), "MASTER")) {
+            throw new UnauthorizedAccessException("접근 권한이 없습니다.");
+        }
+    }
+
+    // -----
+    // NOTE : 사용자 수정 간 중복 필드 검증
+    private void validateUserDuplicationOnModify(Long id, PutUserReqDTOV1 dto) {
         userRepository.findUserByIdNotAndUsernameOrPhoneOrSlackEmailAndDeletedAtIsNull(
                 id,
                 dto.getUser().getUsername(),
