@@ -62,7 +62,7 @@ public class UserServiceV1 {
                     dto.getUser().getPhone(),
                     dto.getUser().getRole(),
                     dto.getUser().getSlackEmail(),
-                    "modifiedBy"
+                    PassportUtil.getUsername(passport)
             );
         }
     }
