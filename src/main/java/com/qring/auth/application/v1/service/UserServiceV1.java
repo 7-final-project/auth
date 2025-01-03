@@ -78,11 +78,16 @@ public class UserServiceV1 {
     // NOTE : 회원가입 검증 프로세스
     private void validateUserCreationProcess(PostUserReqDTOV1 dto) {
 
-        validateUsernameDuplication(dto.getUser().getUsername());
-
-        validatePhoneDuplication(dto.getUser().getPhone());
-
-        validateSlackEmailDuplication(dto.getUser().getSlackEmail());
+        // NOTE : 필드 중복 검증
+        userRepository.findFirstByUsernameOrPhoneOrSlackEmailAndDeletedAtIsNull(
+                dto.getUser().getUsername(),
+                dto.getUser().getPhone(),
+                dto.getUser().getSlackEmail()
+        ).ifPresent(existingUser -> {
+            validateUsernameDuplication(existingUser, dto.getUser().getUsername());
+            validatePhoneDuplication(existingUser, dto.getUser().getPhone());
+            validateSlackEmailDuplication(existingUser, dto.getUser().getSlackEmail());
+        });
 
     }
 
@@ -123,12 +128,6 @@ public class UserServiceV1 {
 
     // -----
     // NOTE : 유저 이름 중복 검증
-    private void validateUsernameDuplication(String username) {
-        if (userRepository.existsByUsernameAndDeletedAtIsNull(username)) {
-            throw new DuplicateResourceException("이미 존재하는 유저이름입니다.");
-        }
-    }
-
     private void validateUsernameDuplication(UserEntity userEntity, String username) {
         if (Objects.equals(userEntity.getUsername(), username)) {
             throw new DuplicateResourceException("이미 존재하는 유저이름입니다.");
@@ -137,12 +136,6 @@ public class UserServiceV1 {
 
     // -----
     // NOTE : 휴대폰 번호 중복 검증
-    private void validatePhoneDuplication(String phone) {
-        if (userRepository.existsByPhoneAndDeletedAtIsNull(phone)) {
-            throw new DuplicateResourceException("이미 등록된 휴대폰 번호입니다.");
-        }
-    }
-
     private void validatePhoneDuplication(UserEntity userEntity, String phone) {
         if (Objects.equals(userEntity.getPhone(), phone)) {
             throw new DuplicateResourceException("이미 등록된 휴대전화 번호입니다.");
@@ -151,12 +144,6 @@ public class UserServiceV1 {
 
     // -----
     // NOTE : 슬랙 이메일 중복 검증
-    private void validateSlackEmailDuplication(String slackEmail) {
-        if (userRepository.existsBySlackEmailAndDeletedAtIsNull(slackEmail)) {
-            throw new DuplicateResourceException("이미 등록된 슬랙 이메일입니다.");
-        }
-    }
-
     private void validateSlackEmailDuplication(UserEntity userEntity, String slackEmail) {
         if (Objects.equals(userEntity.getSlackEmail(), slackEmail)) {
             throw new DuplicateResourceException("이미 등록된 슬랙 이메일입니다.");
