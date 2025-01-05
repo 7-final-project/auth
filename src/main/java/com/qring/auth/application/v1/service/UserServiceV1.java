@@ -106,7 +106,7 @@ public class UserServiceV1 {
     // -----
     // NOTE : 관리자 권한 검증
     private static void validateUserRole(String passport) {
-        if (!Objects.equals(PassportUtil.getRole(passport), "MASTER")) {
+        if (!Objects.equals(PassportUtil.getRole(passport), "관리자")) {
             throw new UnauthorizedAccessException("접근 권한이 없습니다.");
         }
     }
