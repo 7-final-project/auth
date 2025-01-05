@@ -10,11 +10,9 @@ public interface UserRepository {
 
     Optional<UserEntity> findByUsernameAndDeletedAtIsNull(String username);
 
-    boolean existsByUsernameAndDeletedAtIsNull(String username);
+    Optional<UserEntity> findFirstByUsernameOrPhoneOrSlackEmailAndDeletedAtIsNull(String username, String phone, String slackEmail);
 
-    boolean existsByPhoneAndDeletedAtIsNull(String phone);
-
-    boolean existsBySlackEmailAndDeletedAtIsNull(String slackEmail);
+    Optional<UserEntity> findUserByIdNotAndUsernameOrPhoneOrSlackEmailAndDeletedAtIsNull(Long id, String username, String phone, String slackEmail);
 
     UserEntity save(UserEntity userEntity);
 
