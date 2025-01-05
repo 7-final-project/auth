@@ -1,11 +1,9 @@
 package com.qring.auth.infrastructure.jwt;
 
-import com.qring.auth.domain.model.constraint.RoleType;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +16,6 @@ public class JwtUtil {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
     public static final String BEARER_PREFIX = "Bearer ";
-    private static final long TOKEN_TIME = 60 * 60 * 1000L;
 
     @Value("${service.jwt.secret-key}")
     private String secretKey;
@@ -38,7 +35,7 @@ public class JwtUtil {
         return BEARER_PREFIX +
                 Jwts.builder()
                         .claim("userId", userId)
-                        .setExpiration(new Date(date.getTime() + TOKEN_TIME))
+                        .setExpiration(new Date(date.getTime() + (60 * 60 * 1000L)))
                         .setIssuedAt(date)
                         .signWith(key, signatureAlgorithm)
                         .compact();
@@ -53,7 +50,7 @@ public class JwtUtil {
                         .claim("userId", id)
                         .claim("role", role)
                         .claim("slackEmail", slackEmail)
-                        .setExpiration(new Date(date.getTime() + (60 * 60 * 5)))
+                        .setExpiration(new Date(date.getTime() + (5 * 60 * 1000L)))
                         .setIssuedAt(date)
                         .signWith(key, signatureAlgorithm)
                         .compact();
