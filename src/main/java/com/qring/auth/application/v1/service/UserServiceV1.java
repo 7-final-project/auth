@@ -3,6 +3,7 @@ package com.qring.auth.application.v1.service;
 import com.qring.auth.application.global.exception.DuplicateResourceException;
 import com.qring.auth.application.global.exception.EntityNotFoundException;
 import com.qring.auth.application.global.exception.UnauthorizedAccessException;
+import com.qring.auth.application.v1.message.RedisMessagePublisherV1;
 import com.qring.auth.application.v1.res.UserPostResDTOV1;
 import com.qring.auth.domain.model.UserEntity;
 import com.qring.auth.domain.repository.UserRepository;
@@ -22,6 +23,7 @@ public class UserServiceV1 {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final RedisMessagePublisherV1 redisMessagePublisherV1;
 
     @Transactional
     public UserPostResDTOV1 joinBy(PostUserReqDTOV1 dto) {
@@ -65,6 +67,8 @@ public class UserServiceV1 {
                     PassportUtil.getUsername(passport)
             );
         }
+
+        redisMessagePublisherV1.publishUserModificationEvent(userEntityForModify.getId());
     }
 
     // -----
