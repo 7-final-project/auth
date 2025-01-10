@@ -14,7 +14,7 @@ public class UserGetByIdResDTOV1 {
 
     private User user;
 
-    private static UserGetByIdResDTOV1 of(UserEntity userEntity) {
+    public static UserGetByIdResDTOV1 of(UserEntity userEntity) {
         return UserGetByIdResDTOV1.builder()
                 .user(User.from(userEntity))
                 .build();
