@@ -1,5 +1,6 @@
 package com.qring.auth.presentation.v1.controller;
 
+import com.qring.auth.application.v1.res.UserGetByIdResDTOV1;
 import com.qring.auth.application.v1.res.UserPostResDTOV1;
 import com.qring.auth.application.global.dto.ResDTO;
 import com.qring.auth.application.v1.service.UserServiceV1;
@@ -29,6 +30,19 @@ public class UserControllerV1 implements UserControllerSwagger {
                         .data(userServiceV1.joinBy(dto))
                         .build(),
                 HttpStatus.CREATED
+        );
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ResDTO<UserGetByIdResDTOV1>> getBy(@PathVariable Long id) {
+
+        return new ResponseEntity<>(
+                ResDTO.<UserGetByIdResDTOV1>builder()
+                        .code(HttpStatus.OK.value())
+                        .message("회원 상세조회에 성공했습니다.")
+                        .data(userServiceV1.getBy(id))
+                        .build(),
+                HttpStatus.OK
         );
     }
 
