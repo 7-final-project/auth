@@ -4,6 +4,7 @@ import com.qring.auth.application.global.exception.DuplicateResourceException;
 import com.qring.auth.application.global.exception.EntityNotFoundException;
 import com.qring.auth.application.global.exception.UnauthorizedAccessException;
 import com.qring.auth.application.v1.message.RedisMessagePublisherV1;
+import com.qring.auth.application.v1.res.UserGetByIdResDTOV1;
 import com.qring.auth.application.v1.res.UserPostResDTOV1;
 import com.qring.auth.domain.model.UserEntity;
 import com.qring.auth.domain.repository.UserRepository;
@@ -39,6 +40,14 @@ public class UserServiceV1 {
         );
 
         return UserPostResDTOV1.of(userRepository.save(userEntityForSave));
+    }
+
+    @Transactional(readOnly = true)
+    public UserGetByIdResDTOV1 getBy(Long id) {
+
+        UserEntity userEntityForMapping = getUserEntityById(id);
+
+        return UserGetByIdResDTOV1.of(userEntityForMapping);
     }
 
     @Transactional
