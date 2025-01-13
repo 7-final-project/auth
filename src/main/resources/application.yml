@@ -1,5 +1,7 @@
 spring:
   application:
     name: auth-service
+  config:
+    import: classpath:application-key.yml
   profiles:
     active: dev
