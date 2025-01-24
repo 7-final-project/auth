@@ -1,11 +1,11 @@
-package com.qring.auth.application.v1.service;
+package com.qring.auth.application.service;
 
 import com.qring.auth.application.global.exception.BadRequestException;
 import com.qring.auth.application.global.exception.EntityNotFoundException;
 import com.qring.auth.domain.model.UserEntity;
 import com.qring.auth.domain.repository.UserRepository;
 import com.qring.auth.infrastructure.jwt.JwtUtil;
-import com.qring.auth.presentation.v1.req.PostAuthReqDTOV1;
+import com.qring.auth.presentation.req.PostAuthReqDTOV1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

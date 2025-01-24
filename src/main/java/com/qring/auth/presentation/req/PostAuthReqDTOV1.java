@@ -1,4 +1,4 @@
-package com.qring.auth.presentation.v1.req;
+package com.qring.auth.presentation.req;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;

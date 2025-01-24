@@ -1,4 +1,4 @@
-package com.qring.auth.application.v1.message;
+package com.qring.auth.application.message;
 
 public interface RedisMessagePublisherV1 {
 

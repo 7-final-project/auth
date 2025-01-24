@@ -1,16 +1,16 @@
-package com.qring.auth.application.v1.service;
+package com.qring.auth.application.service;
 
 import com.qring.auth.application.global.exception.DuplicateResourceException;
 import com.qring.auth.application.global.exception.EntityNotFoundException;
 import com.qring.auth.application.global.exception.UnauthorizedAccessException;
-import com.qring.auth.application.v1.message.RedisMessagePublisherV1;
-import com.qring.auth.application.v1.res.UserGetByIdResDTOV1;
-import com.qring.auth.application.v1.res.UserPostResDTOV1;
+import com.qring.auth.application.res.UserGetByIdResDTOV1;
+import com.qring.auth.application.res.UserPostResDTOV1;
+import com.qring.auth.application.message.RedisMessagePublisherV1;
 import com.qring.auth.domain.model.UserEntity;
 import com.qring.auth.domain.repository.UserRepository;
 import com.qring.auth.infrastructure.util.PassportUtil;
-import com.qring.auth.presentation.v1.req.PostUserReqDTOV1;
-import com.qring.auth.presentation.v1.req.PutUserReqDTOV1;
+import com.qring.auth.presentation.req.PostUserReqDTOV1;
+import com.qring.auth.presentation.req.PutUserReqDTOV1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.qring.auth.infrastructure.messaging.redis;
 
-import com.qring.auth.application.v1.message.RedisMessagePublisherV1;
+import com.qring.auth.application.message.RedisMessagePublisherV1;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.ReactiveRedisTemplate;
