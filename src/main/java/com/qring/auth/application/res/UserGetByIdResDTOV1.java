@@ -1,4 +1,4 @@
-package com.qring.auth.application.v1.res;
+package com.qring.auth.application.res;
 
 import com.qring.auth.domain.model.UserEntity;
 import lombok.AllArgsConstructor;

@@ -1,10 +1,10 @@
-package com.qring.auth.presentation.v1.controller;
+package com.qring.auth.presentation.controller;
 
 import com.qring.auth.application.global.dto.ResDTO;
-import com.qring.auth.application.v1.service.AuthServiceV1;
+import com.qring.auth.application.service.AuthServiceV1;
 import com.qring.auth.infrastructure.docs.AuthControllerSwagger;
 import com.qring.auth.infrastructure.jwt.JwtUtil;
-import com.qring.auth.presentation.v1.req.PostAuthReqDTOV1;
+import com.qring.auth.presentation.req.PostAuthReqDTOV1;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

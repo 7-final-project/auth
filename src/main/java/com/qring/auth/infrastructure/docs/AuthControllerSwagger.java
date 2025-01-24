@@ -1,7 +1,7 @@
 package com.qring.auth.infrastructure.docs;
 
 import com.qring.auth.application.global.dto.ResDTO;
-import com.qring.auth.presentation.v1.req.PostAuthReqDTOV1;
+import com.qring.auth.presentation.req.PostAuthReqDTOV1;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

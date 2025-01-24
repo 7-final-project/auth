@@ -1,9 +1,9 @@
 package com.qring.auth.infrastructure.docs;
 
-import com.qring.auth.application.v1.res.UserGetByIdResDTOV1;
-import com.qring.auth.application.v1.res.UserPostResDTOV1;
+import com.qring.auth.application.res.UserGetByIdResDTOV1;
+import com.qring.auth.application.res.UserPostResDTOV1;
 import com.qring.auth.application.global.dto.ResDTO;
-import com.qring.auth.presentation.v1.req.PostUserReqDTOV1;
+import com.qring.auth.presentation.req.PostUserReqDTOV1;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
